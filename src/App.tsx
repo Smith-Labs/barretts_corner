@@ -21,7 +21,7 @@ function App() {
           
           <div className='avatar bottom-0 left-0 hover:animate-bounce'>
             <div className='mask mask-squircle w-36'>
-              <img src='../src/assets/images/blinktalk.png' />
+              <img src='/../src/assets/images/blinktalk.png' />
             </div>
           </div>
         
@@ -81,7 +81,7 @@ function App() {
           <div className='grid grid-cols-4 justify-items-center'>
             {socials.map((social) => (
               <a href={social.url} className='transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-150 duration-300'>
-                <img src={`../src/assets/images/icons/socials/icons8-${social.name}-50.png`} />
+                <img src={`/../src/assets/images/icons/socials/icons8-${social.name}-50.png`} />
               </a>
             ) )}
           </div>
