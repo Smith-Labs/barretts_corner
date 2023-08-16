@@ -1,6 +1,15 @@
 import './App.css'
 import socials from '../lib/userConfig.json'
 
+declare global {
+  interface Window {
+      about_barrett:any;
+      games_list:any;
+      schedule:any;
+      socials:any;
+  }
+}
+
 function App() {
   
 
