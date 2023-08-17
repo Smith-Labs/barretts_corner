@@ -42,7 +42,7 @@ div.page-background {
   }
 
 div.header-background {
-  background-image: url(../src/assets/images/bg-checkerboard.jpg);
+  background-image: url(../src/assets/Images/bg-checkerboard.jpg);
   
   }
 
@@ -77,6 +77,6 @@ button {
 }
 
 .avatar .image {
-  src: url(../src/assets/images/blinktalk.png);
+  src: url(../src/assets/Images/blinktalk.png);
 }
 

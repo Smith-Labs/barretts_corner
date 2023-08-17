@@ -21,7 +21,7 @@ function App() {
           
           <div className='avatar bottom-0 left-0 hover:animate-bounce'>
             <div className='mask mask-squircle w-36'>
-              <img src='../src/assets/Images/blinktalk.png'/>
+              <img src='/blinktalk.png'/>
             </div>
           </div>
         
@@ -43,6 +43,10 @@ function App() {
         <div className=' m-2'>
           <button className="btn w-36 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300" onClick={() => window.socials.showModal()}>Socials</button>
         </div>
+      </section>
+
+      <section>
+
       </section>
 
       <dialog id="about_barrett" className="modal">
@@ -81,7 +85,7 @@ function App() {
           <div className='grid grid-cols-4 justify-items-center'>
             {socials.map((social) => (
               <a href={social.url} className='transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-150 duration-300'>
-                <img src={`/../src/assets/Images/icons/socials/icons8-${social.name}-50.png`} />
+                <img src={`/icons/socials/icons8-${social.name}-50.png`} />
               </a>
             ) )}
           </div>
