@@ -150,7 +150,7 @@ function App() {
         
       </section>
 
-      <footer className={`flex justify-items-center bottom-0 w-full bg-slate-700`} >        
+      <footer className={`flex fixed justify-items-center bottom-0 w-full bg-slate-700`} >        
           <div className={`absolute bottom-0 left-0 bg-neutral w-full pb-4 transform 
             ${
               isOpen ? 'translate-y-0' : 'translate-y-full'
