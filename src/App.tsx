@@ -141,24 +141,35 @@ function App() {
         </div>
       </section>
 
+      <section className='grid justify-items-center w-full'>
+        <div className='divider w-3/4' ><h3 className='font-bold text-lg'>Latest Stream</h3></div>
+      </section>
+
+      <section className='flex flex-col place-items-center justify-items-center'>
+        
+        <iframe className='aspect-video w-96 md:w-1/2 relative self' src='https://www.youtube.com/embed/dQw4w9WgXcQ' allow='accelerometer; encrypted-media; gyroscope;' allowFullScreen></iframe>
+        {/* <div className='grid card bg-neutral place-items-center rounded-box md:w-1/2'>Video Player</div> */}
+
+      </section>
+
       <section className='grid absolute bottom-0 justify-items-center w-full' >
-      
-      <h3 className='font-bold text-lg'>Favorite Games!</h3>
 
-      <div className='grid justify-items-center space-x-4 grid-cols-3 m-4'>
-        { 
-          topGames === undefined ? '' : 
-          topGames.map((game: GameCard) => (
-              
+        <div className='divider w-3/4'><h3 className='font-bold text-lg'>Favorite Games!</h3></div>
 
-              <div className='transition ease-in-out delay-150 hover:-translate-y-36 hover:scale-150 duration-300 w-1/2'>
+        <div className='grid justify-items-center space-x-4 grid-cols-3 m-4'>
+          { 
+            topGames === undefined ? '' : 
+            topGames.map((game: GameCard) => (
                 
-                  <img className='rounded-lg' src={`${game.box_art_url.replace(new RegExp("{width}x{height}"), `285x380`)}`} />
-                
-              </div>
-          ))
-        }
-      </div>
+
+                <div className='transition ease-in-out delay-150 hover:-translate-y-36 hover:scale-150 duration-300 w-1/2'>
+                  
+                    <img className='rounded-lg' src={`${game.box_art_url.replace(new RegExp("{width}x{height}"), `285x380`)}`} />
+                  
+                </div>
+            ))
+          }
+        </div>
 
 
       </section>
