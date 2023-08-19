@@ -46,6 +46,7 @@ function App() {
   const [token, setToken] = useState<Token>()
   const [user, setUser] = useState<TwitchUser>()
   const [topGames, setTopGames] = useState<TopGameList>()
+  const [isOpen, setIsOpen] = useState<boolean>(true)
 
   async function fetchKey() {
     
@@ -97,8 +98,6 @@ function App() {
     } catch {}
   }
 
-
-
   useEffect(() => {
     fetchUser()
     fetchTopGames()
@@ -147,32 +146,31 @@ function App() {
 
       <section className='flex flex-col place-items-center justify-items-center'>
         
-        <iframe className='aspect-video w-96 md:w-1/2 relative self' src='https://www.youtube.com/embed/dQw4w9WgXcQ' allow='accelerometer; encrypted-media; gyroscope;' allowFullScreen></iframe>
-        {/* <div className='grid card bg-neutral place-items-center rounded-box md:w-1/2'>Video Player</div> */}
-
+        <iframe className='aspect-video w-3/4 md:w-1/2 relative self' src='https://www.youtube.com/embed/dQw4w9WgXcQ' allow='accelerometer; encrypted-media; gyroscope;' allowFullScreen></iframe>
+        
       </section>
 
-      <section className='grid absolute bottom-0 justify-items-center w-full' >
-
-        <div className='divider w-3/4'><h3 className='font-bold text-lg'>Favorite Games!</h3></div>
-
-        <div className='grid justify-items-center space-x-4 grid-cols-3 m-4'>
-          { 
-            topGames === undefined ? '' : 
-            topGames.map((game: GameCard) => (
-                
-
-                <div className='transition ease-in-out delay-150 hover:-translate-y-36 hover:scale-150 duration-300 w-1/2'>
-                  
-                    <img className='rounded-lg' src={`${game.box_art_url.replace(new RegExp("{width}x{height}"), `285x380`)}`} />
-                  
-                </div>
-            ))
-          }
-        </div>
-
-
-      </section>
+      <footer className={`grid fixed bottom-0 w-full bg-slate-700 justify-items-center`} >        
+          <div className={`absolute bottom-0 left-0 bg-neutral w-full pb-4 transform 
+            ${
+              isOpen ? 'translate-y-0' : 'translate-y-full'
+            } transition-transform ease-in-out duration-300`}
+          >
+            <div className={`divider w-full h-full bg-slate-700 transition-transform ease-in-out duration-300 -translate-y-11`}><button className='font-bold text-lg p-0' onClick={()=> setIsOpen(!isOpen)}>Favorite Games!</button></div>
+            <div className='grid justify-items-center space-x-4 grid-cols-3'>
+              { 
+                topGames === undefined ? '' : 
+                topGames.map((game: GameCard) => (
+                    <div className='transition ease-in-out delay-150 hover:-translate-y-36 hover:scale-150 duration-300 w-1/2'>
+                      
+                        <img className='rounded-lg' src={`${game.box_art_url.replace(new RegExp("{width}x{height}"), `285x380`)}`} />
+                      
+                    </div>
+                ))
+              }
+            </div>
+          </div>
+      </footer>
 
       <dialog id="about_barrett" className="modal">
         <form method="dialog" className="modal-box">
