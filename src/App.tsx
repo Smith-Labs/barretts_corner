@@ -46,7 +46,7 @@ function App() {
   const [token, setToken] = useState<Token>()
   const [user, setUser] = useState<TwitchUser>()
   const [topGames, setTopGames] = useState<TopGameList>()
-  const [isOpen, setIsOpen] = useState<boolean>(true)
+  const [isOpen, setIsOpen] = useState<boolean>(false)
 
   async function fetchKey() {
     
@@ -150,20 +150,20 @@ function App() {
         
       </section>
 
-      <footer className={`grid fixed bottom-0 w-full bg-slate-700 justify-items-center`} >        
+      <footer className={`flex justify-items-center bottom-0 w-full bg-slate-700`} >        
           <div className={`absolute bottom-0 left-0 bg-neutral w-full pb-4 transform 
             ${
               isOpen ? 'translate-y-0' : 'translate-y-full'
             } transition-transform ease-in-out duration-300`}
           >
             <div className={`divider w-full h-full bg-slate-700 transition-transform ease-in-out duration-300 -translate-y-11`}><button className='font-bold text-lg p-0' onClick={()=> setIsOpen(!isOpen)}>Favorite Games!</button></div>
-            <div className='grid justify-items-center space-x-4 grid-cols-3'>
+            <div className='grid justify-items-center grid-cols-3'>
               { 
                 topGames === undefined ? '' : 
                 topGames.map((game: GameCard) => (
-                    <div className='transition ease-in-out delay-150 hover:-translate-y-36 hover:scale-150 duration-300 w-1/2'>
+                    <div className='flex items-center justify-center transition ease-in-out delay-150 hover:-translate-y-36 hover:scale-150 duration-300 w-1/2'>
                       
-                        <img className='rounded-lg' src={`${game.box_art_url.replace(new RegExp("{width}x{height}"), `285x380`)}`} />
+                        <img className='rounded-lg shadow-2xl hover:shadow-accent' src={`${game.box_art_url.replace(new RegExp("{width}x{height}"), `285x380`)}`} />
                       
                     </div>
                 ))
