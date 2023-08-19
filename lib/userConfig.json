@@ -1,10 +1,21 @@
-[ 
+{
+    "Socials": [ 
   
             {"name": "twitter", "url": "https://twitter.com/b_e_r_r_y_tweet" },
             {"name": "twitch", "url": "https://www.twitch.tv/barrett_ok/about"},
             {"name": "discord", "url": "https://discord.gg/zh7GTzxqv9"},
             {"name": "soundcloud", "url": "https://soundcloud.com/barrett_ok"}
   
-]
-    
+    ],
+
+    "Games_Resources": {
+        "IGDB": "https://www.igdb.com/advanced_search"
+    },
+
+    "Games": [
+        {"id": 494998, "name": "Pikmin 4", "igdb_id": 59843},
+        {"id": 14543, "name": "Pokémon Crystal Version", "igdb_id": 1514},
+        {"id": 17828, "name": "The Legend of Zelda: Twilight Princess", "igdb_id": 1036 }
+    ]
+}    
 

@@ -1,5 +1,5 @@
 import './App.css'
-import socials from '../lib/userConfig.json'
+import { Socials } from '../lib/userConfig.json'
 import { useEffect, useState } from 'react';
 import React from 'react';
 
@@ -33,9 +33,19 @@ type TwitchUser = {
   created_at: Date
 }
 
+type GameCard = {
+  id: number
+  name: string
+  box_art_url: string
+  igdb_id: number
+}
+
+type TopGameList = GameCard[]
+
 function App() {
   const [token, setToken] = useState<Token>()
   const [user, setUser] = useState<TwitchUser>()
+  const [topGames, setTopGames] = useState<TopGameList>()
 
   async function fetchKey() {
     
@@ -66,38 +76,57 @@ function App() {
 
     setUser(data)
 
-    console.log(user)
-
     } catch {}
   }
 
+  async function fetchTopGames() {
+
+    try{
+      const response = await fetch(`/.netlify/functions/twitch-user-top-games?token=${token?.access_token}`)
+  
+      if (!response.ok) {
+        throw new Error(`Network response was not ok: ${response.status} ${response.statusText}`);
+      }
+  
+      const {data} = await response.json()
+      
+      console.log(data)
+      
+      setTopGames(data)
+  
+    } catch {}
+  }
+
+
+
   useEffect(() => {
     fetchUser()
+    fetchTopGames()
   }, [token])
 
   useEffect(() => {
-    fetchKey()
-               
+    fetchKey() 
   }, []) 
 
   return (
     <>
       <div className='page-background w-full bg-cover bg-center bg-no-repeat'></div>
-      <section className=''>
-        <div className='flex header-background bg-center w-full text-4xl md:justify-center relative'>
-           
-          <div className='avatar bottom-0 left-0 hover:animate-bounce'>
-            <div className='mask mask-squircle w-36'>
-              <img src='/blinktalk.png'/>
-            </div> 
+      <section className="">
+        <div className="flex header-background bg-center w-full text-4xl md:justify-center relative animation-transform duration-300">
+          
+          <div className="avatar bottom-0 left-0 hover:animate-bounce">
+            <div className="mask mask-squircle w-36">
+              <img src="/blinktalk.png" alt="Avatar" />
+            </div>
           </div>
         
         </div>
-            <p className='text-left lg:text-center font-extrabold border-t-2 border-black text-accent px-3 bg-primary'>Barret's Corner</p>
-      
+        <p className="text-left lg:text-center font-extrabold border-t-2 border-black text-accent px-3 bg-primary">
+          Barret's Corner
+        </p>
       </section>
 
-      <section className=' grid grid-cols-1 gap-3 md:grid-cols-4 w-max m-auto justify-items-center'>
+      <section className='grid grid-cols-2 gap-3 md:grid-cols-4 w-max m-auto justify-items-center'>
         <div className=' m-2 '>
           <button className="btn w-36 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300" onClick={() => window.about_barrett.showModal()}>About Barrett</button>
         </div>
@@ -112,7 +141,26 @@ function App() {
         </div>
       </section>
 
-      <section>
+      <section className='grid absolute bottom-0 justify-items-center w-full' >
+      
+      <h3 className='font-bold text-lg'>Favorite Games!</h3>
+
+      <div className='grid justify-items-center space-x-4 grid-cols-3 m-4'>
+      
+        { 
+          topGames === undefined ? '' : 
+          topGames.map((game: GameCard) => (
+              
+
+              <div className='transition ease-in-out delay-150 hover:-translate-y-36 hover:scale-150 duration-300 w-1/2'>
+                
+                  <img className='rounded-lg' src={`${game.box_art_url.replace(new RegExp("{width}x{height}"), `285x380`)}`} />
+                
+              </div>
+          ))
+        }
+      </div>
+
 
       </section>
 
@@ -129,7 +177,19 @@ function App() {
       <dialog id="games_list" className="modal">
         <form method="dialog" className="modal-box">
           <h3 className="font-bold text-lg">Favorite Games</h3>
-          <p className="py-4">I enjoy the Pickman, Pokemon and Zelda series' and play similar titles! </p>
+          <div className='grid space-x-4 grid-cols-3 justify-items-center items-center bottom-0 m-4'>
+
+            { 
+              topGames === undefined ? '' : 
+              topGames.map((game: GameCard) => (
+                  <div className='transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300'>
+                    
+                      <img className='rounded-lg' src={`${game.box_art_url.replace(new RegExp("{width}x{height}"), `285x380`)}`} />
+                    
+                  </div>
+              ))
+            }
+          </div>
         </form>
         <form method="dialog" className="modal-backdrop">
           <button>close</button>
@@ -150,7 +210,7 @@ function App() {
         <form method="dialog" className="modal-box bg-primary">
           <h3 className="font-bold text-lg">Socials</h3>
           <div className='grid grid-cols-4 justify-items-center'>
-            {socials.map((social) => (
+            {Socials.map((social) => (
               <a href={social.url} className='transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-150 duration-300'>
                 <img src={`/icons/socials/icons8-${social.name}-50.png`} />
               </a>
