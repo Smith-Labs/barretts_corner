@@ -42,11 +42,39 @@ type GameCard = {
 
 type TopGameList = GameCard[]
 
+type Video = {
+  id: number,
+  stream_id: number
+  user_id: number
+  user_login: string
+  user_name: string
+  title: string
+  description: string
+  created_at: Date
+  published_at: Date
+  url: string
+  thumbnail_url: string
+  viewable: string
+  view_count: number
+  language: string
+  type: string
+  duration: string
+  muted_segments: [
+    {
+      duration: number
+      offset: number
+    }
+  ]
+}
+
+type Videos = Video[]
+
 function App() {
   const [token, setToken] = useState<Token>()
   const [user, setUser] = useState<TwitchUser>()
   const [topGames, setTopGames] = useState<TopGameList>()
   const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [videos, setVideos] = useState<Videos>()
 
   async function fetchKey() {
     
@@ -59,6 +87,8 @@ function App() {
 
       const data: Token = await response.json();
       
+      console.log(import.meta.env.VITE_NETLIFY_SITE_URL)
+
       setToken(data)
 
     } catch{}
@@ -98,9 +128,30 @@ function App() {
     } catch {}
   }
 
+  async function fetchVideos() {
+
+    try{
+      const response = await fetch(`/.netlify/functions/get-user-videos?token=${token?.access_token}`)
+  
+      if (!response.ok) {
+        throw new Error(`Network response was not ok: ${response.status} ${response.statusText}`);
+      }
+  
+      const {data} = await response.json()
+      
+      console.log(data[0])
+
+      
+      setVideos(data)
+  
+    } catch {}
+
+  }
+
   useEffect(() => {
     fetchUser()
     fetchTopGames()
+    fetchVideos()
   }, [token])
 
   useEffect(() => {
@@ -146,7 +197,7 @@ function App() {
 
       <section className='flex flex-col place-items-center justify-items-center'>
         
-        <iframe className='aspect-video w-3/4 md:w-1/2 relative self' src='https://www.youtube.com/embed/dQw4w9WgXcQ' allow='accelerometer; encrypted-media; gyroscope;' allowFullScreen></iframe>
+        <iframe className='aspect-video w-3/4 md:w-1/2 relative self' src={ videos != undefined ? `https://player.twitch.tv/?video=${videos[0].id}&parent=${import.meta.env.VITE_NETLIFY_SITE_URL}` : '' } allow='accelerometer; encrypted-media; gyroscope;' allowFullScreen></iframe>
         
       </section>
 
