@@ -7,7 +7,7 @@ import React from 'react';
 declare global {
   interface Window {
       about_barrett:any;
-      games_list:any;
+      goal_list:any;
       schedule:any;
       socials:any;
   }
@@ -131,7 +131,7 @@ function App() {
           <button className="btn w-36 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300" onClick={() => window.about_barrett.showModal()}>About Barrett</button>
         </div>
         <div className=' m-2 '>
-          <button className="btn w-36 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300" onClick={() => window.games_list.showModal()}>Games List</button>
+          <button className="btn w-36 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300" onClick={() => window.goal_list.showModal()}>Goals</button>
         </div>
         <div className=' m-2'>
           <button className="btn w-36 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300" onClick={() => window.schedule.showModal()}>Schedule</button>
@@ -146,7 +146,6 @@ function App() {
       <h3 className='font-bold text-lg'>Favorite Games!</h3>
 
       <div className='grid justify-items-center space-x-4 grid-cols-3 m-4'>
-      
         { 
           topGames === undefined ? '' : 
           topGames.map((game: GameCard) => (
@@ -174,21 +173,13 @@ function App() {
         </form>
       </dialog>
 
-      <dialog id="games_list" className="modal">
+      <dialog id="goal_list" className="modal">
         <form method="dialog" className="modal-box">
-          <h3 className="font-bold text-lg">Favorite Games</h3>
-          <div className='grid space-x-4 grid-cols-3 justify-items-center items-center bottom-0 m-4'>
+          <h3 className="font-bold text-lg">Stream Goals!</h3>
+          <div className='py-4'>
 
-            { 
-              topGames === undefined ? '' : 
-              topGames.map((game: GameCard) => (
-                  <div className='transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300'>
-                    
-                      <img className='rounded-lg' src={`${game.box_art_url.replace(new RegExp("{width}x{height}"), `285x380`)}`} />
-                    
-                  </div>
-              ))
-            }
+            <p>Render some goal stats here ... or maybe on the main page </p>
+
           </div>
         </form>
         <form method="dialog" className="modal-backdrop">
