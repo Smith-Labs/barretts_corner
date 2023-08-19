@@ -87,8 +87,6 @@ function App() {
 
       const data: Token = await response.json();
       
-      console.log(process.env.VITE_NETLIFY_SITE_URL)
-
       setToken(data)
 
     } catch{}
@@ -197,7 +195,7 @@ function App() {
 
       <section className='flex flex-col place-items-center justify-items-center'>
         
-        <iframe className='aspect-video w-3/4 md:w-1/2 relative self' src={ videos == undefined  ? 'https://www.youtube.com/embed/dQw4w9WgXcQ' : `https://player.twitch.tv/?video=${videos[0].id}&parent=${import.meta.env.VITE_NETLIFY_SITE_URL}` } allow='accelerometer; encrypted-media; gyroscope;' allowFullScreen></iframe>
+        <iframe className='aspect-video w-3/4 md:w-1/2 relative self' src={ videos?.length == undefined  ? 'https://www.youtube.com/embed/dQw4w9WgXcQ' : `https://player.twitch.tv/?video=${videos[0].id}&parent=${import.meta.env.VITE_NETLIFY_SITE_URL}` } allow='accelerometer; encrypted-media; gyroscope;' allowFullScreen></iframe>
         
       </section>
 
