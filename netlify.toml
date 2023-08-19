@@ -4,7 +4,7 @@ functions = "netlify/functions"
 publish = "dist/"
 
 [[redirects]]
-from = "[functions-sub-dir]*"
+from = "/twitch-user/*"
 to = "/.netlify/functions/:splat"
 status = 200
 
