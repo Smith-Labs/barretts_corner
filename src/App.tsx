@@ -182,10 +182,13 @@ function App() {
   // }
 
   useEffect(() => {
-    fetchUser()
-    fetchTopGames()
     fetchVideos()
-    // fetchGoals()
+    fetchTopGames()
+  },[user])
+
+  useEffect(() => {
+    fetchUser()
+    
   }, [token])
 
   useEffect(() => {
