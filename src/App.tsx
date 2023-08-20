@@ -156,6 +156,8 @@ function App() {
       
       // console.log(data[0])
 
+      console.log(import.meta.env.VITE_NETLIFY_SITE_URL)
+
       setVideos(data)
   
     } catch {}
