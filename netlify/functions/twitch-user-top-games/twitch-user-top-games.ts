@@ -15,7 +15,7 @@ export const handler: Handler = async (event, context) => {
         }
       })
 
-      console.log(response.data)
+      // console.log(response.data)
 
     return {
       statusCode: 200,

@@ -6,7 +6,7 @@ export const handler: Handler = async (event, context) => {
 
   try {
 
-    const response = await axios.get(`https://api.twitch.tv/helix/videos?user_id=91417564`,
+    const response = await axios.get(`https://api.twitch.tv/helix/videos?user_id=${params?.user_id}`,
       {
         headers: {
           'Authorization': `Bearer ${params?.token}`,
@@ -14,7 +14,7 @@ export const handler: Handler = async (event, context) => {
         }
       })
 
-      console.log(response.data.data)
+      // console.log(response.data.data)
 
     return {
       statusCode: 200,

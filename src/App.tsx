@@ -69,12 +69,27 @@ type Video = {
 
 type Videos = Video[]
 
+// type Goal = {
+//   id: string
+//   broadcaster_id: number
+//   broadcaster_name: string
+//   broadcaster_login: string
+//   type: string
+//   description: string
+//   current_amount: number
+//   target_amount: number
+//   created_at: Date
+// }
+
+// type Goals = Goal[]
+
 function App() {
   const [token, setToken] = useState<Token>()
   const [user, setUser] = useState<TwitchUser>()
   const [topGames, setTopGames] = useState<TopGameList>()
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [videos, setVideos] = useState<Videos>()
+  // const [goals, setGoals] = useState()
 
   async function fetchKey() {
     
@@ -103,6 +118,8 @@ function App() {
 
     const data: TwitchUser = await response.json()
 
+    // console.log(data)
+
     setUser(data)
 
     } catch {}
@@ -119,7 +136,7 @@ function App() {
   
       const {data} = await response.json()
       
-      console.log(data)
+      // console.log(data)
       
       setTopGames(data)
   
@@ -129,7 +146,7 @@ function App() {
   async function fetchVideos() {
 
     try{
-      const response = await fetch(`/.netlify/functions/get-user-videos?token=${token?.access_token}`)
+      const response = await fetch(`/.netlify/functions/get-user-videos?token=${token?.access_token}&user_id=${user?.id}`)
   
       if (!response.ok) {
         throw new Error(`Network response was not ok: ${response.status} ${response.statusText}`);
@@ -137,19 +154,37 @@ function App() {
   
       const {data} = await response.json()
       
-      console.log(data[0])
+      // console.log(data[0])
 
       
       setVideos(data)
   
     } catch {}
-
   }
+
+  // async function fetchGoals() {
+
+  //   try{
+  //     const response = await fetch(`/.netlify/functions/get-user-goals?token=${token?.access_token}&user_id=${user?.id}`)
+  
+  //     if (!response.ok) {
+  //       throw new Error(`Network response was not ok: ${response.status} ${response.statusText}`);
+  //     }
+  
+  //     const {data} = await response.json()
+      
+  //     console.log(data)
+      
+  //     setGoals(data)
+  
+  //   } catch {}
+  // }
 
   useEffect(() => {
     fetchUser()
     fetchTopGames()
     fetchVideos()
+    // fetchGoals()
   }, [token])
 
   useEffect(() => {
@@ -158,7 +193,7 @@ function App() {
 
   return (
     <>
-      <div className='page-background w-full bg-cover bg-center bg-no-repeat'></div>
+      <div className='page-background w-full bg-cover bg-center bg-no-repeat scale-125'></div>
       <section className="">
         <div className="flex header-background bg-center w-full text-4xl md:justify-center relative animation-transform duration-300">
           
@@ -200,7 +235,7 @@ function App() {
       </section>
 
       <footer className={`flex fixed justify-items-center bottom-0 w-full bg-slate-700`} >        
-          <div className={`absolute bottom-0 left-0 bg-neutral w-full pb-4 transform 
+          <div className={`absolute bottom-0 left-0 bg-slate-900 bg-opacity-25 glass w-full pb-4 transform
             ${
               isOpen ? 'translate-y-0' : 'translate-y-full'
             } transition-transform ease-in-out duration-300`}

@@ -12,7 +12,7 @@ export const handler: Handler = async (event, context) => {
   try {
       const response = await axios.post('https://id.twitch.tv/oauth2/token', requestBody);
       
-      console.log(response.data);
+      // console.log(response.data);
 
       return {
         statusCode: 200,
