@@ -209,7 +209,7 @@ function App() {
         
         </div>
         <p className="text-left lg:text-center font-extrabold border-t-2 border-black text-accent px-3 bg-primary">
-          Barret's Corner
+          Barrett's Corner
         </p>
       </section>
 
