@@ -2,7 +2,8 @@ import './App.css'
 import { Socials } from '../lib/userConfig.json'
 import { useEffect, useState } from 'react';
 import React from 'react';
-
+import { AppHeader } from './components/AppHeader';
+import { ButtonGroup } from './components/ButtonGroup';
 
 declare global {
   interface Window {
@@ -118,8 +119,6 @@ function App() {
 
     const data: TwitchUser = await response.json()
 
-    // console.log(data)
-
     setUser(data)
 
     } catch {}
@@ -198,44 +197,21 @@ function App() {
   return (
     <>
       <div className='page-background w-full bg-cover bg-center bg-no-repeat scale-125'></div>
-      <section className="">
-        <div className="flex header-background bg-center w-full text-4xl md:justify-center relative animation-transform duration-300">
-          
-          <div className="avatar bottom-0 left-0 hover:animate-bounce">
-            <div className="mask mask-squircle w-36">
-              <img src="/blinktalk.png" alt="Avatar" />
-            </div>
-          </div>
-        
-        </div>
-        <p className="text-left lg:text-center font-extrabold border-t-2 border-black text-accent px-3 bg-primary">
-          Barrett's Corner
-        </p>
-      </section>
+      
+      <AppHeader avatar="/blinktalk.png" />
 
-      <section className='grid grid-cols-2 gap-3 md:grid-cols-4 w-max m-auto justify-items-center'>
-        <div className=' m-2 '>
-          <button className="btn w-36 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300" onClick={() => window.about_barrett.showModal()}>About Barrett</button>
-        </div>
-        <div className=' m-2 '>
-          <button className="btn w-36 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300" onClick={() => window.goal_list.showModal()}>Goals</button>
-        </div>
-        <div className=' m-2'>
-          <button className="btn w-36 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300" onClick={() => window.schedule.showModal()}>Schedule</button>
-        </div>
-        <div className=' m-2'>
-          <button className="btn w-36 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300" onClick={() => window.socials.showModal()}>Socials</button>
-        </div>
-      </section>
+      <ButtonGroup/>
 
       <section className='grid justify-items-center w-full'>
         <div className='divider w-3/4' ><h3 className='font-bold text-lg'>Latest Stream</h3></div>
       </section>
 
       <section className='flex flex-col place-items-center justify-items-center'>
-        
-        <iframe className='aspect-video w-3/4 md:w-1/2 relative self' src={ videos?.length == undefined  ? 'https://www.youtube.com/embed/dQw4w9WgXcQ' : `https://player.twitch.tv/?video=${videos[0].id}&parent=${import.meta.env.VITE_NETLIFY_SITE_URL}` } allow='accelerometer; encrypted-media; gyroscope;' allowFullScreen></iframe>
-        
+        <iframe 
+          className='aspect-video w-3/4 md:w-1/2 relative self' 
+          src={ videos?.length == undefined  ? 'https://www.youtube.com/embed/dQw4w9WgXcQ' : `https://player.twitch.tv/?video=${videos[0].id}&parent=${import.meta.env.VITE_NETLIFY_SITE_URL}` } 
+          allow='accelerometer; encrypted-media; gyroscope;' allowFullScreen>
+        </iframe>  
       </section>
 
       <footer className={`flex fixed justify-items-center bottom-0 w-full bg-slate-700`} >        
