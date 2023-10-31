@@ -209,7 +209,7 @@ function App() {
       <section className='flex flex-col place-items-center justify-items-center'>
         <iframe 
           className='aspect-video w-3/4 md:w-1/2 relative self' 
-          src={ videos?.length == undefined  ? 'https://www.youtube.com/embed/dQw4w9WgXcQ' : `https://player.twitch.tv/?video=${videos[0].id}&parent=${import.meta.env.VITE_NETLIFY_SITE_URL}` } 
+          src={ videos?.length == undefined  ? '' : `https://player.twitch.tv/?video=${videos[0].id}&parent=${import.meta.env.VITE_NETLIFY_SITE_URL}` } 
           allow='accelerometer; encrypted-media; gyroscope;' allowFullScreen>
         </iframe>  
       </section>

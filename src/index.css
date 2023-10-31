@@ -45,8 +45,9 @@ div.page-background {
   }
 
 div.header-background {
-  background-image: url(../src/assets/Images/bg-checkerboard.jpg);
-  
+  background-image: url(../src/assets/Images/checkerboard_1440.png);
+  background-size: cover;
+  background-position: center center;
   }
 
 button {

@@ -11,7 +11,7 @@ export const AppHeader = (props: AppHeaderProps) => {
             <section className="">
                 <div className="flex header-background bg-center w-full text-4xl md:justify-center relative animation-transform duration-300">
                 
-                <div className="avatar bottom-0 left-0 hover:animate-bounce">
+                <div className="avatar bottom-0 left-0 transition hover:animate-bounce">
                     <div className="mask mask-squircle w-36">
                         <img src={props.avatar} alt="Avatar" />
                     </div>
