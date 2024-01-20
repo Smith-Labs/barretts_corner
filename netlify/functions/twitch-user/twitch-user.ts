@@ -7,7 +7,7 @@ export const handler: Handler = async (event, context) => {
 
   try {
 
-    const response = await axios.get('https://api.twitch.tv/helix/users?login=barrett_ok',
+    const response = await axios.get('https://api.twitch.tv/helix/users?login=ok_barrett',
       {
         headers: {
           'Authorization': `Bearer ${params?.token}`,
